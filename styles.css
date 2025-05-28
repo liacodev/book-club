@@ -27,7 +27,8 @@ body{
   }
   @media (max-width: 600px) {
       body {
-        background-attachment: scroll; /* disables fixed on mobile */
+        background-attachment: fixed; /* disables fixed on mobile */
+        background-color: #160238;
       }
     }
 
