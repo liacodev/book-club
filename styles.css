@@ -25,19 +25,17 @@ body{
     background-position: center bottom;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    
   }
   @media (max-width: 600px) {
     body {
-      background: url("celestial.png") no-repeat center bottom scroll;
-      background-color: #160238;
-      background-size: cover;
-      background-position: center bottom;
-      background-attachment: scroll; /* ✅ disables fixed properly */
-      background-repeat: no-repeat; /* ✅ still prevent repeating */
-      min-height: 100vh;
+      background-image: url("celestial.png");
+      background-attachment: fixed;       /* keep image fixed when scrolling */
+      background-position: center bottom; /* keep image position */
+      background-repeat: no-repeat;       /* no repeat */
+      background-size: auto;               /* keep original size, no stretching */
+      background-color: #160238;           /* fallback background color */
     }
-  }
+  }  
   /* Menu */
   .topnav {
     background-color: transparent;
