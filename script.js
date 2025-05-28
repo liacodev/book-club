@@ -5,7 +5,6 @@ function searchBooks() {
   const searchTerms = input.split(/\s+/);
 
   cards.forEach(card => {
-    // Only search within the title and image alt attributes
     let text = '';
 
     const titleElement = card.querySelector('.card-title'); 
@@ -20,17 +19,16 @@ function searchBooks() {
       }
     });
 
-    // Check if every search term exists in the allowed text
     const matchesAllTerms = searchTerms.every(term => text.includes(term));
     card.style.display = matchesAllTerms ? "" : "none";
   });
 }
 
-
 function resetBooks() {
   const cards = document.querySelectorAll('.flip-card');
   cards.forEach(card => {
     card.style.display = "block";
+    card.classList.remove('flipped');
   });
 
   document.getElementById('searchInput').value = '';
@@ -42,11 +40,11 @@ function toggleForm(button) {
   form.classList.toggle("minimized");
 
   if (form.classList.contains("minimized")) {
-    button.style.setProperty("--icon-content", "'\\f078'"); // chevron down
-    label.style.display = "inline";  // show label when minimized
+    button.style.setProperty("--icon-content", "'\\f078'"); 
+    label.style.display = "inline";  
   } else {
-    button.style.setProperty("--icon-content", "'\\f077'"); // chevron up
-    label.style.display = "none";    // hide label when expanded
+    button.style.setProperty("--icon-content", "'\\f077'"); 
+    label.style.display = "none";   
   }
 }
 
@@ -65,10 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (toggleButton) {
-    toggleButton.style.setProperty("--icon-content", "'\\f078'"); // chevron down
+    toggleButton.style.setProperty("--icon-content", "'\\f078'"); 
   }
 
-  // Reset books and minimize contact form when Home link is clicked
   document.getElementById('homeLink').addEventListener('click', function () {
     resetBooks();
 
@@ -81,17 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (toggleButton) {
-      toggleButton.style.setProperty("--icon-content", "'\\f078'"); // chevron down
+      toggleButton.style.setProperty("--icon-content", "'\\f078'"); 
     }
   });
 });
 
-// ===== ADDED: Mobile tap-to-flip and tap-to-link support for .flip-card =====
 document.querySelectorAll('.flip-card').forEach(card => {
   let tappedOnce = false;
 
   card.addEventListener('touchstart', function (e) {
-    // Only enable on mobile widths (adjust breakpoint if needed)
     if (window.innerWidth > 768) return;
 
     if (!card.classList.contains('flipped')) {
@@ -99,19 +94,33 @@ document.querySelectorAll('.flip-card').forEach(card => {
       card.classList.add('flipped');
       tappedOnce = true;
 
-      // Reset tap flag after 2 seconds
+      e.preventDefault(); // prevent link navigation on first tap
+
       setTimeout(() => {
         tappedOnce = false;
       }, 2000);
     } else if (tappedOnce) {
-      // Second tap: follow the link inside the card if any
+      // Second tap: navigate to the link inside the card
       const link = card.querySelector('a');
       if (link) {
         window.location.href = link.href;
       }
     }
-
-    e.preventDefault(); // prevent default to avoid double tap zoom
   });
+
+  // Prevent immediate navigation if user taps the link directly before flipping
+  const link = card.querySelector('a');
+  if (link) {
+    link.addEventListener('click', function(e) {
+      if (!card.classList.contains('flipped')) {
+        e.preventDefault(); // block link click if card isn't flipped yet
+        card.classList.add('flipped');
+        tappedOnce = true;
+
+        setTimeout(() => {
+          tappedOnce = false;
+        }, 2000);
+      }
+    });
+  }
 });
-// ===== END ADDED =====
