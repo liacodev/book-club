@@ -28,20 +28,12 @@ body{
   }
   @media (max-width: 600px) {
     body {
-      background: none; /* remove default background on mobile */
+      background-image: url("dreamy.jpg");
+      background-repeat: no-repeat;      
+      background-size: cover;               
+      background-color: #160238;         
     }
-  
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: url("celestial.png") center bottom no-repeat;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: -1;
-    }
-  }
+  }  
   /* Menu */
   .topnav {
     background-color: transparent;
