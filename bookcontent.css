@@ -13,7 +13,7 @@
     text-align: justify;
     margin: 30px;;
     padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden; 
   }
   
   /* Content wrapper */
@@ -88,7 +88,7 @@
     background-color: #000;
   }
   
-  /* Responsive Design */
+
   @media (max-width: 600px) {
     .content-container {
       margin: 20px auto;
@@ -112,6 +112,32 @@
   
     h1, h2, h5 {
       text-align: center;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 40px;
+      height: 40px;
+      text-indent: -9999px; 
+      display: inline-block;
+      background: transparent;
+    }
+  
+    #backToTop::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 15px solid #7b86d5; 
+      width: 0;
+      height: 0;
     }
   }
   

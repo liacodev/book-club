@@ -1,4 +1,4 @@
-// Search books by title and alt text on images
+
 function searchBooks() {
   const input = document.getElementById('searchInput').value.toLowerCase().trim();
   const cards = document.querySelectorAll('.flip-card');
@@ -7,13 +7,12 @@ function searchBooks() {
   cards.forEach(card => {
     let text = '';
 
-    // Grab title text if exists (make sure to add class="card-title" in HTML if you want this)
     const titleElement = card.querySelector('.card-title');
     if (titleElement) {
       text += titleElement.innerText.toLowerCase();
     }
 
-    // Also check alt attributes of images inside the card
+
     const images = card.querySelectorAll('img');
     images.forEach(img => {
       if (img.alt) {
@@ -21,13 +20,13 @@ function searchBooks() {
       }
     });
 
-    // Check if all search terms are included in text
+
     const matchesAllTerms = searchTerms.every(term => text.includes(term));
     card.style.display = matchesAllTerms ? "" : "none";
   });
 }
 
-// Reset search and show all cards again
+
 function resetBooks() {
   const cards = document.querySelectorAll('.flip-card');
   cards.forEach(card => {
@@ -38,7 +37,7 @@ function resetBooks() {
   document.getElementById('searchInput').value = '';
 }
 
-// Toggle contact form minimize/maximize
+
 function toggleForm(button) {
   const form = document.getElementById("contactForm");
   const label = document.getElementById("toggle-label");
@@ -53,7 +52,7 @@ function toggleForm(button) {
   }
 }
 
-// Audio toggle for background music
+
 function toggleMusic() {
   const audio = document.getElementById('myAudio');
   const button = document.getElementById('toggleButton');
@@ -67,20 +66,20 @@ function toggleMusic() {
   }
 }
 
-// Initialization on DOM ready
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById("contactForm");
   const label = document.getElementById("toggle-label");
   const toggleButton = form ? form.querySelector('.minimize-btn') : null;
 
-  // Start with form minimized
+
   if (form && !form.classList.contains("minimized")) {
     form.classList.add("minimized");
   }
   if (label) label.style.display = "inline";
   if (toggleButton) toggleButton.style.setProperty("--icon-content", "'\\f078'");
 
-  // Home link resets search and closes form
+
   const homeLink = document.getElementById('homeLink');
   if (homeLink) {
     homeLink.addEventListener('click', () => {
@@ -93,12 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Mobile tap-to-flip, tap-to-navigate on flip cards
+  
   document.querySelectorAll('.flip-card').forEach(card => {
     let tappedOnce = false;
 
     card.addEventListener('touchstart', e => {
-      if (window.innerWidth > 768) return; // Only for mobile
+      if (window.innerWidth > 768) return; 
 
       if (!card.classList.contains('flipped')) {
         // First tap flips the card
@@ -108,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
           tappedOnce = false;
-        }, 2000); // 2 seconds to tap again for navigation
+        }, 2000); // 
       } else if (tappedOnce) {
-        // Second tap navigates to link
+        // 
         const link = card.querySelector('a.card-link');
         if (link) {
           window.location.href = link.href;
@@ -118,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Prevent click navigation on first tap on mobile if not flipped
+  
     const link = card.querySelector('a.card-link');
     if (link) {
       link.addEventListener('click', e => {
