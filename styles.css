@@ -29,6 +29,7 @@ body{
       body {
         background-attachment: fixed; /* disables fixed on mobile */
         background-color: #160238;
+        background-repeat: no-repeat;
       }
     }
 
