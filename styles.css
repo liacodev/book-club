@@ -25,6 +25,12 @@ body{
     background-position: center bottom;
     background-attachment: fixed;
   }
+  @media (max-width: 600px) {
+    body {
+      background-image: url('celestial-mobile.png'); /* higher quality or specifically optimized for mobile */
+    }
+  }
+
   /* Menu */
   .topnav {
     background-color: transparent;
