@@ -83,37 +83,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Mobile tap-to-flip and tap-to-link support for .flip-card
 document.querySelectorAll('.flip-card').forEach(card => {
   let tappedOnce = false;
 
   card.addEventListener('touchstart', function (e) {
-    if (window.innerWidth > 768) return;
+    if (window.innerWidth > 768) return; // Only for mobile
 
     if (!card.classList.contains('flipped')) {
       // First tap: flip the card
       card.classList.add('flipped');
       tappedOnce = true;
 
-      e.preventDefault(); // prevent link navigation on first tap
+      e.preventDefault(); // Prevent link navigation on first tap
 
       setTimeout(() => {
         tappedOnce = false;
       }, 2000);
     } else if (tappedOnce) {
-      // Second tap: navigate to the link inside the card
-      const link = card.querySelector('a');
+      // Second tap: follow the link inside the card
+      const link = card.querySelector('a.card-link');
       if (link) {
         window.location.href = link.href;
       }
     }
   });
 
-  // Prevent immediate navigation if user taps the link directly before flipping
-  const link = card.querySelector('a');
+  // Prevent immediate navigation if user taps the link before flipping
+  const link = card.querySelector('a.card-link');
   if (link) {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       if (!card.classList.contains('flipped')) {
-        e.preventDefault(); // block link click if card isn't flipped yet
+        e.preventDefault(); // Prevent navigation on first tap
         card.classList.add('flipped');
         tappedOnce = true;
 
