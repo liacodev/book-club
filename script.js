@@ -5,10 +5,14 @@ function searchBooks() {
   const searchTerms = input.split(/\s+/);
 
   cards.forEach(card => {
-    // Get all visible text inside the card
-    let text = card.innerText.toLowerCase();
+    // Only search within the title and image alt attributes
+    let text = '';
 
-    // Include alt attributes from images inside the card
+    const titleElement = card.querySelector('.card-title'); 
+    if (titleElement) {
+      text += titleElement.innerText.toLowerCase();
+    }
+
     const images = card.querySelectorAll('img');
     images.forEach(img => {
       if (img.alt) {
@@ -16,12 +20,12 @@ function searchBooks() {
       }
     });
 
-    // Check if every search term exists in combined text
+    // Check if every search term exists in the allowed text
     const matchesAllTerms = searchTerms.every(term => text.includes(term));
-
     card.style.display = matchesAllTerms ? "" : "none";
   });
 }
+
 
 function resetBooks() {
   const cards = document.querySelectorAll('.flip-card');
