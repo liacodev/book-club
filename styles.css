@@ -26,10 +26,10 @@ body{
     background-attachment: fixed;
   }
   @media (max-width: 600px) {
-    body {
-      background-image: url('celestial-mobile.png'); /* higher quality or specifically optimized for mobile */
+      body {
+        background-attachment: scroll; /* disables fixed on mobile */
+      }
     }
-  }
 
   /* Menu */
   .topnav {
