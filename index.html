@@ -48,10 +48,10 @@
   padding: 12px 20px;
   border: none;
   border-radius: 50px;
-  background: transparent;   /* No background */
+  background: transparent;   
   color: #fff;
   cursor: pointer;
-  transition: none;          /* No hover background change */
+  transition: none;         
   /* Remove backdrop-filter since no background */
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -71,10 +71,10 @@
   
       if (audio.paused) {
         audio.play();
-        button.textContent = "🎧";  // Fairy music = playing
+        button.textContent = "🎧";  
       } else {
         audio.pause();
-        button.textContent = "🔕";  // Bell muted = paused
+        button.textContent = "🔕"; 
       }
     }
   </script>
