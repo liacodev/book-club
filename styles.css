@@ -59,6 +59,21 @@ body{
     display: none;
   }
 
+/* Mobile view - stack nav links, smaller font, less padding */
+@media (max-width: 600px) {
+  .topnav {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .topnav a {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 6px 0;
+    width: 60%;         /* make links almost full width */
+    box-sizing: border-box;
+  }
+}
+
 
 /* search  */
 
@@ -221,6 +236,13 @@ body{
   padding: 0 10%;
 }
 
+@media (max-width: 600px) {
+  .color-grid {
+    justify-content: center; /* Center cards on small screens */
+    padding: 0 2%;           /* Optional: reduce padding */
+    gap: 15px;
+  }
+}
   .card-link {
     text-decoration: none;
     color: inherit;

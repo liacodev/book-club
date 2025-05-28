@@ -32,24 +32,42 @@ function resetBooks() {
   document.getElementById('searchInput').value = '';
 }
 
+function toggleForm(button) {
+  const form = document.getElementById("contactForm");
+  const label = document.getElementById("toggle-label");
+  form.classList.toggle("minimized");
+  
+  if (form.classList.contains("minimized")) {
+    button.style.setProperty("--icon-content", "'\\f078'"); // chevron down
+    label.style.display = "inline";  // show label when minimized
+  } else {
+    button.style.setProperty("--icon-content", "'\\f077'"); // chevron up
+    label.style.display = "none";    // hide label when expanded
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Start contact form minimized on initial page load
+  const form = document.getElementById("contactForm");
+  if (form && !form.classList.contains("minimized")) {
+    form.classList.add("minimized");
+  }
+
+  const label = document.getElementById("toggle-label");
+  if (label) {
+    label.style.display = "inline";
+  }
+
+  // Reset books and minimize contact form when Home link is clicked
   document.getElementById('homeLink').addEventListener('click', function () {
     resetBooks();
+
+    if (form && !form.classList.contains("minimized")) {
+      form.classList.add("minimized");
+    }
+
+    if (label) {
+      label.style.display = "inline";
+    }
   });
 });
-
-
-
-  function toggleForm(button) {
-    const form = document.getElementById("contactForm");
-    const label = document.getElementById("toggle-label");
-    form.classList.toggle("minimized");
-    
-    if (form.classList.contains("minimized")) {
-      button.style.setProperty("--icon-content", "'\\f078'"); // chevron down
-      label.style.display = "inline";  // show label when minimized
-    } else {
-      button.style.setProperty("--icon-content", "'\\f077'"); // chevron up
-      label.style.display = "none";    // hide label when expanded
-    }
-  }
