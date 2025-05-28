@@ -1,17 +1,19 @@
+// Search books by title and alt text on images
 function searchBooks() {
   const input = document.getElementById('searchInput').value.toLowerCase().trim();
   const cards = document.querySelectorAll('.flip-card');
-
   const searchTerms = input.split(/\s+/);
 
   cards.forEach(card => {
     let text = '';
 
-    const titleElement = card.querySelector('.card-title'); 
+    // Grab title text if exists (make sure to add class="card-title" in HTML if you want this)
+    const titleElement = card.querySelector('.card-title');
     if (titleElement) {
       text += titleElement.innerText.toLowerCase();
     }
 
+    // Also check alt attributes of images inside the card
     const images = card.querySelectorAll('img');
     images.forEach(img => {
       if (img.alt) {
@@ -19,11 +21,13 @@ function searchBooks() {
       }
     });
 
+    // Check if all search terms are included in text
     const matchesAllTerms = searchTerms.every(term => text.includes(term));
     card.style.display = matchesAllTerms ? "" : "none";
   });
 }
 
+// Reset search and show all cards again
 function resetBooks() {
   const cards = document.querySelectorAll('.flip-card');
   cards.forEach(card => {
@@ -34,94 +38,99 @@ function resetBooks() {
   document.getElementById('searchInput').value = '';
 }
 
+// Toggle contact form minimize/maximize
 function toggleForm(button) {
   const form = document.getElementById("contactForm");
   const label = document.getElementById("toggle-label");
   form.classList.toggle("minimized");
 
   if (form.classList.contains("minimized")) {
-    button.style.setProperty("--icon-content", "'\\f078'"); 
-    label.style.display = "inline";  
+    button.style.setProperty("--icon-content", "'\\f078'"); // down arrow
+    label.style.display = "inline";
   } else {
-    button.style.setProperty("--icon-content", "'\\f077'"); 
-    label.style.display = "none";   
+    button.style.setProperty("--icon-content", "'\\f077'"); // up arrow
+    label.style.display = "none";
   }
 }
 
+// Audio toggle for background music
+function toggleMusic() {
+  const audio = document.getElementById('myAudio');
+  const button = document.getElementById('toggleButton');
+
+  if (audio.paused) {
+    audio.play();
+    button.textContent = "🎧";
+  } else {
+    audio.pause();
+    button.textContent = "🔕";
+  }
+}
+
+// Initialization on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById("contactForm");
   const label = document.getElementById("toggle-label");
   const toggleButton = form ? form.querySelector('.minimize-btn') : null;
 
-  // Ensure form is minimized on page load
+  // Start with form minimized
   if (form && !form.classList.contains("minimized")) {
     form.classList.add("minimized");
   }
+  if (label) label.style.display = "inline";
+  if (toggleButton) toggleButton.style.setProperty("--icon-content", "'\\f078'");
 
-  if (label) {
-    label.style.display = "inline";
-  }
-
-  if (toggleButton) {
-    toggleButton.style.setProperty("--icon-content", "'\\f078'"); 
-  }
-
-  document.getElementById('homeLink').addEventListener('click', function () {
-    resetBooks();
-
-    if (form && !form.classList.contains("minimized")) {
-      form.classList.add("minimized");
-    }
-
-    if (label) {
-      label.style.display = "inline";
-    }
-
-    if (toggleButton) {
-      toggleButton.style.setProperty("--icon-content", "'\\f078'"); 
-    }
-  });
-});
-
-// Mobile tap-to-flip and tap-to-link support for .flip-card
-document.querySelectorAll('.flip-card').forEach(card => {
-  let tappedOnce = false;
-
-  card.addEventListener('touchstart', function (e) {
-    if (window.innerWidth > 768) return; // Only for mobile
-
-    if (!card.classList.contains('flipped')) {
-      // First tap: flip the card
-      card.classList.add('flipped');
-      tappedOnce = true;
-
-      e.preventDefault(); // Prevent link navigation on first tap
-
-      setTimeout(() => {
-        tappedOnce = false;
-      }, 2000);
-    } else if (tappedOnce) {
-      // Second tap: follow the link inside the card
-      const link = card.querySelector('a.card-link');
-      if (link) {
-        window.location.href = link.href;
+  // Home link resets search and closes form
+  const homeLink = document.getElementById('homeLink');
+  if (homeLink) {
+    homeLink.addEventListener('click', () => {
+      resetBooks();
+      if (form && !form.classList.contains("minimized")) {
+        form.classList.add("minimized");
       }
-    }
-  });
+      if (label) label.style.display = "inline";
+      if (toggleButton) toggleButton.style.setProperty("--icon-content", "'\\f078'");
+    });
+  }
 
-  // Prevent immediate navigation if user taps the link before flipping
-  const link = card.querySelector('a.card-link');
-  if (link) {
-    link.addEventListener('click', function (e) {
+  // Mobile tap-to-flip, tap-to-navigate on flip cards
+  document.querySelectorAll('.flip-card').forEach(card => {
+    let tappedOnce = false;
+
+    card.addEventListener('touchstart', e => {
+      if (window.innerWidth > 768) return; // Only for mobile
+
       if (!card.classList.contains('flipped')) {
-        e.preventDefault(); // Prevent navigation on first tap
+        // First tap flips the card
         card.classList.add('flipped');
         tappedOnce = true;
+        e.preventDefault();
 
         setTimeout(() => {
           tappedOnce = false;
-        }, 2000);
+        }, 2000); // 2 seconds to tap again for navigation
+      } else if (tappedOnce) {
+        // Second tap navigates to link
+        const link = card.querySelector('a.card-link');
+        if (link) {
+          window.location.href = link.href;
+        }
       }
     });
-  }
+
+    // Prevent click navigation on first tap on mobile if not flipped
+    const link = card.querySelector('a.card-link');
+    if (link) {
+      link.addEventListener('click', e => {
+        if (window.innerWidth <= 768 && !card.classList.contains('flipped')) {
+          e.preventDefault();
+          card.classList.add('flipped');
+          tappedOnce = true;
+          setTimeout(() => {
+            tappedOnce = false;
+          }, 2000);
+        }
+      });
+    }
+  });
 });
