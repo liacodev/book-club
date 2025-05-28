@@ -85,3 +85,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// ===== ADDED: Mobile tap-to-flip and tap-to-link support for .flip-card =====
+document.querySelectorAll('.flip-card').forEach(card => {
+  let tappedOnce = false;
+
+  card.addEventListener('touchstart', function (e) {
+    // Only enable on mobile widths (adjust breakpoint if needed)
+    if (window.innerWidth > 768) return;
+
+    if (!card.classList.contains('flipped')) {
+      // First tap: flip the card
+      card.classList.add('flipped');
+      tappedOnce = true;
+
+      // Reset tap flag after 2 seconds
+      setTimeout(() => {
+        tappedOnce = false;
+      }, 2000);
+    } else if (tappedOnce) {
+      // Second tap: follow the link inside the card if any
+      const link = card.querySelector('a');
+      if (link) {
+        window.location.href = link.href;
+      }
+    }
+
+    e.preventDefault(); // prevent default to avoid double tap zoom
+  });
+});
+// ===== END ADDED =====
