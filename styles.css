@@ -24,15 +24,18 @@ body{
     background-size: cover;
     background-position: center bottom;
     background-attachment: fixed;
+    background-repeat: no-repeat;
   }
   @media (max-width: 600px) {
-      body {
-        background-attachment: fixed; /* disables fixed on mobile */
-        background-color: #160238;
-        background-repeat: no-repeat;
-      }
+    body {
+      background-image: url("celestial.png"); /* repeat the same image */
+      background-color: #160238;
+      background-size: cover;
+      background-position: center bottom;
+      background-attachment: scroll; /* ✅ disables fixed properly */
+      background-repeat: no-repeat; /* ✅ still prevent repeating */
     }
-
+  }
   /* Menu */
   .topnav {
     background-color: transparent;
