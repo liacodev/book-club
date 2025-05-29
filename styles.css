@@ -28,12 +28,10 @@ body{
   }
   @media (max-width: 600px) {
     body {
-      background-image: url("dreamy.jpg");
-      background-repeat: no-repeat;      
-      background-size: cover;               
-      background-color: #160238;         
+      background-color: #222;
     }
-  }  
+  }
+  
   /* Menu */
   .topnav {
     background-color: transparent;
