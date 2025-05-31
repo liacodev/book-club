@@ -347,7 +347,6 @@ body{
       object-fit: contain; 
     }
   }
- 
 
 /* footer */
 .page-footer {
@@ -361,7 +360,8 @@ body{
   font-size: 14px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (orientation: landscape) and (max-height: 600px) {
+  /* Contact Form Position & Minimized Style */
   .form-container {
     right: 0;
     bottom: 80px;
@@ -381,11 +381,10 @@ body{
     justify-content: center;
   }
 
-  /* Make toggle-wrapper horizontal flex container */
   .form-container.minimized .toggle-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px; /* space between text and arrow */
+    gap: 8px;
   }
 
   .form-container.minimized .toggle-wrapper span {
@@ -409,14 +408,48 @@ body{
     display: block;
   }
 
-  /* Hide full form and header when minimized */
   .form-container.minimized form,
   .form-container.minimized h2 {
     display: none;
   }
 
-  /* Remove background from toggle button when form is expanded */
   .form-container:not(.minimized) .minimize-btn {
     background: none !important;
+  }
+
+  /* Body background for small landscape */
+  body {
+    background-image: none;
+    background-color: #15122D;
+  }
+
+  /* Top Navigation adjustments */
+  .topnav {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .topnav a {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 6px 0;
+    width: 60%;
+    box-sizing: border-box;
+  }
+
+  /* Book grid and cards */
+  .color-grid {
+    justify-content: center;
+    padding: 0 2%;
+    gap: 15px;
+  }
+
+  .flip-card {
+    width: 150px;
+    height: 210px;
+  }
+
+  .flip-card-front img.book-box {
+    object-fit: contain;
   }
 }
