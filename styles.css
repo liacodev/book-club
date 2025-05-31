@@ -463,5 +463,7 @@ body{
 
   .flip-card-front img.book-box {
     object-fit: contain;
+    width: 100%;
+    height: 100%;
   }
 }
