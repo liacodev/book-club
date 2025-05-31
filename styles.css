@@ -361,7 +361,7 @@ body{
 }
 
 /* MOBILE + LANDSCAPE RESPONSIVE DESIGN */
-@media (max-width: 768px), (orientation: landscape) and (max-height: 600px) {
+@media (max-width: 768px) {
   /* CONTACT FORM POSITIONING & MINIMIZED STYLE */
   .form-container {
     right: 0;
