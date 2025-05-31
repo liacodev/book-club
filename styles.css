@@ -360,8 +360,9 @@ body{
   font-size: 14px;
 }
 
+/* MOBILE + LANDSCAPE RESPONSIVE DESIGN */
 @media (max-width: 768px), (orientation: landscape) and (max-height: 600px) {
-  /* Contact Form Position & Minimized Style */
+  /* CONTACT FORM POSITIONING & MINIMIZED STYLE */
   .form-container {
     right: 0;
     bottom: 80px;
@@ -381,49 +382,60 @@ body{
     justify-content: center;
   }
 
+  /* Toggle button and label wrapper */
   .form-container.minimized .toggle-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
   }
 
+  /* Contact Us label */
   .form-container.minimized .toggle-wrapper span {
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
     color: white;
-    user-select: none;
+    display: inline-block;
+    line-height: 1;
   }
 
+  /* Arrow Button */
   .form-container.minimized .minimize-btn {
-    font-size: 20px;
+    font-size: 18px;
     color: #7b86d5;
     background: none;
     border: none;
     padding: 0;
+    margin: 0;
     cursor: pointer;
+    display: inline-block;
+    line-height: 1;
   }
 
-  .minimize-btn::before {
+  .form-container.minimized .minimize-btn::before {
     content: "<";
-    display: block;
+    line-height: 1;
   }
 
+  /* Hide full form and header when minimized */
   .form-container.minimized form,
   .form-container.minimized h2 {
     display: none;
   }
 
+  /* Remove background from toggle button when expanded */
   .form-container:not(.minimized) .minimize-btn {
     background: none !important;
   }
 
-  /* Body background for small landscape */
+  /* Body background override */
   body {
     background-image: none;
     background-color: #15122D;
   }
 
-  /* Top Navigation adjustments */
+  /* TOP NAVIGATION */
   .topnav {
     flex-direction: column;
     margin-top: 20px;
@@ -437,7 +449,7 @@ body{
     box-sizing: border-box;
   }
 
-  /* Book grid and cards */
+  /* BOOK GRID & CARDS */
   .color-grid {
     justify-content: center;
     padding: 0 2%;
