@@ -29,7 +29,7 @@ body{
   @media (max-width: 600px) {
     body {
       background-image: none;
-      background: linear-gradient(to bottom, #1B0034, #3E1F47, #5e2085, #3E1F47, #1B0034);
+      background-color: #15122D;
     }  
   }
 
@@ -202,8 +202,8 @@ body{
 .minimize-btn {
   border: none;
   background: none;
-  color: #7b86d5;       /* Icon color */
-  font-size: 28px;      /* Size of the chevron */
+  color: #7b86d5;       
+  font-size: 28px;     
   cursor: pointer;
   padding: 0;
   display: inline-flex;
@@ -220,7 +220,6 @@ body{
   color: #5a66b3;
 }
 
-/* Use ::before to add the chevron-up icon from FontAwesome */
   .minimize-btn::before {
     content: var(--icon-content, "\f077");
     font-family: "FontAwesome";
@@ -281,7 +280,7 @@ body{
   .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
   }
-  /* Flip card when .flipped class is added (for mobile tap) */
+
 .flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
@@ -295,6 +294,7 @@ body{
     border-radius: 10px;
     overflow: hidden;
   }
+  
   
 
   .flip-card-front img.color-box {
@@ -335,6 +335,19 @@ body{
       gap: 20px;
     }
   }
+  @media screen and (max-width: 768px) {
+    .flip-card {
+      width: 150px;  
+      height: 210px; 
+    }
+  
+    .flip-card-front img.book-box {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; 
+    }
+  }
+ 
 
 /* footer */
 .page-footer {
@@ -346,4 +359,64 @@ body{
   width: 100%;
   margin-top: 50px;
   font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    right: 0;
+    bottom: 80px;
+    position: fixed;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .form-container.minimized {
+    width: 120px;
+    height: 50px;
+    padding: 0 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Make toggle-wrapper horizontal flex container */
+  .form-container.minimized .toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* space between text and arrow */
+  }
+
+  .form-container.minimized .toggle-wrapper span {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    user-select: none;
+  }
+
+  .form-container.minimized .minimize-btn {
+    font-size: 20px;
+    color: #7b86d5;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .minimize-btn::before {
+    content: "<";
+    display: block;
+  }
+
+  /* Hide full form and header when minimized */
+  .form-container.minimized form,
+  .form-container.minimized h2 {
+    display: none;
+  }
+
+  /* Remove background from toggle button when form is expanded */
+  .form-container:not(.minimized) .minimize-btn {
+    background: none !important;
+  }
 }
